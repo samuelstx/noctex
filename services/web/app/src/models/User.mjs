@@ -89,12 +89,12 @@ export const UserSchema = new Schema(
     holdingAccount: { type: Boolean, default: false },
     ace: {
       mode: { type: String, default: 'none' },
-      theme: { type: String, default: 'textmate' },
+      theme: { type: String, default: 'noctex' }, // Noctex (antes 'textmate')
       overallTheme: { type: String },
       // When overallTheme is `system`, we switch between `lightTheme` and `darkTheme` based on system settings
       // When overallTheme is `light-` or empty, we use the `theme` option.
-      lightTheme: { type: String, default: 'textmate' },
-      darkTheme: { type: String, default: 'overleaf_dark' },
+      lightTheme: { type: String, default: 'noctex_light' }, // Noctex (antes 'textmate')
+      darkTheme: { type: String, default: 'noctex' }, // Noctex (antes 'overleaf_dark')
       fontSize: { type: Number, default: '12' },
       autoComplete: { type: Boolean, default: true },
       autoPairDelimiters: { type: Boolean, default: true },
