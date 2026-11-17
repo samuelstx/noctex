@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="124" height="32" viewBox="0 0 124 32" role="img" aria-label="Noctex">
+  <defs><mask id="m"><rect width="32" height="32" fill="#fff"/><circle cx="18.5" cy="11.5" r="9" fill="#000"/></mask></defs>
+  <circle cx="13" cy="16.5" r="11" fill="#7c5ce0" mask="url(#m)"/>
+  <circle cx="24.5" cy="6" r="1.7" fill="#3560ac"/>
+  <g fill="none" stroke="#0b0b10" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 11V25M34 15.5a4.5 4.5 0 0 1 9 0V25"/>
+    <circle cx="53" cy="18" r="7"/>
+    <path d="M74.5 12.6A7 7 0 1 0 74.5 23.4"/>
+    <path d="M82 6V21.5a3.5 3.5 0 0 0 3.5 3.5H87M78.5 11H87"/>
+    <path d="M90 18H104A7 7 0 1 0 101.95 22.95"/>
+    <path d="M108 11L120 25M120 11L108 25"/>
+  </g>
+</svg>
