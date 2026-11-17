@@ -1,0 +1,34 @@
+// =============================================================================
+// Noctex · ajustes de componentes que no dependen solo de la paleta
+// -----------------------------------------------------------------------------
+// Se importa al final de main-style.scss para ganar por orden. Cada bloque
+// explica qué corrige; si upstream cambia el componente, revisar aquí.
+// =============================================================================
+
+:root {
+  // Tinta para texto sobre rellenos pastel (≥10:1 sobre todos los rellenos)
+  --noctex-ink: #{$neutral-90};
+}
+
+// Botones: Overleaf fija texto blanco en primario/peligro; sobre pastel no se
+// lee. Especificidad (0,3,0) para ganar también dentro de modales y avisos.
+:root .btn.btn {
+  --btn-primary-color: var(--noctex-ink);
+  --btn-danger-color: var(--noctex-ink);
+}
+
+// Modo oscuro: el borde de los botones secundarios era blanco puro
+@include theme('default') {
+  .btn.btn {
+    --btn-secondary-border: var(--border-primary-dark);
+    --btn-secondary-hover-border: var(--border-hover-dark);
+  }
+}
+
+// Modo claro: el relleno lila pastel necesita un borde para destacar sobre blanco
+@include theme('light') {
+  .btn.btn-primary {
+    --bs-btn-border-color: var(--green-50);
+    --bs-btn-hover-border-color: var(--green-60);
+  }
+}

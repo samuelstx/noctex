@@ -1,0 +1,262 @@
+// =============================================================================
+// Noctex · paleta «Lavanda» (pastel sobre negro + modo claro pastel)
+// -----------------------------------------------------------------------------
+// Se importa justo después de foundations/colors.scss y sobrescribe:
+//   1. las variables Sass (las usa Bootstrap al compilar botones, alertas…)
+//   2. las variables CSS de :root (las usan los componentes en tiempo real)
+// Así no se modifica ningún valor en los archivos originales de Overleaf: si
+// upstream añade tokens nuevos, se quedan con su valor original hasta que se
+// añadan aquí. Contraste verificado (WCAG 2.x AA) en CUSTOM.md.
+// =============================================================================
+
+/* ====== Rampas ====== */
+
+// Neutros: grises lavanda; el extremo oscuro es casi negro (fondo Noctex)
+$white: #fff;
+$neutral-05: #faf9fd;
+$neutral-10: #f3f1f9;
+$neutral-20: #e5e2ef;
+$neutral-30: #cdc9db;
+$neutral-40: #aca8bd;
+$neutral-50: #8b879c;
+$neutral-60: #625e74;
+$neutral-70: #45425a;
+$neutral-80: #1e1d28;
+$neutral-85: #15151d;
+$neutral-90: #0b0b10;
+
+// El verde de marca de Overleaf pasa a lila. Se conserva el nombre de la rampa
+// para que los ~40 componentes que usan var(--green-*) cambien sin tocarlos.
+$green-10: #f4f1ff;
+$green-15: #ece6ff;
+$green-20: #ddd3ff;
+$green-30: #c4b5fd;
+$green-40: #a893f2;
+$green-50: #7c5ce0;
+$green-60: #6849d0;
+$green-65: #5f42c2;
+$green-70: #5439b0;
+
+$blue-10: #eef5ff;
+$blue-20: #d3e6ff;
+$blue-30: #9cc9ff;
+$blue-40: #6fa8f0;
+$blue-50: #3560ac;
+$blue-60: #2f579b;
+$blue-70: #24467d;
+
+$red-10: #fff0f3;
+$red-20: #ffd0d9;
+$red-30: #ffa3b5;
+$red-40: #f07c93;
+$red-50: #b42f49;
+$red-60: #9e2840;
+$red-70: #7e2033;
+
+$yellow-10: #fff8e1;
+$yellow-20: #ffebb0;
+$yellow-30: #ffe08a;
+$yellow-40: #f2c14e;
+$yellow-50: #8a5a00;
+$yellow-60: #704900;
+$yellow-70: #5a3b00;
+
+// Nueva: menta para «éxito» (antes compartía el verde de marca)
+$noctex-mint-10: #eafbf3;
+$noctex-mint-30: #9de5c3;
+$noctex-mint-50: #1c6e4c;
+
+// Tonos propios del modo oscuro que no caen en la rampa
+$noctex-bg-3: #20202b;
+$noctex-text-dark: #eceaf4;
+$noctex-text-2-dark: #b9b6c8;
+$noctex-border-dark: #6e6a84;
+$noctex-divider-dark: #24232f;
+$noctex-lilac-hover: #d9cefe;
+$noctex-lilac-visited: #b7a6fa;
+$noctex-sky-hover: #bfdcff;
+
+/* ====== Semántica (Sass) ====== */
+
+$bg-light-primary: $white;
+$bg-light-secondary: $neutral-10;
+$bg-light-tertiary: $neutral-20;
+$bg-light-disabled: $neutral-20;
+$bg-dark-primary: $neutral-90;
+$bg-dark-secondary: $neutral-85;
+$bg-dark-tertiary: $noctex-bg-3;
+$bg-dark-disabled: $noctex-bg-3;
+
+// Rellenos pastel: con texto oscuro encima (≥10:1) en ambos temas
+$bg-accent-01: $green-30;
+$bg-accent-02: $noctex-lilac-hover;
+$bg-accent-03: $green-10;
+$bg-danger-01: $red-30;
+$bg-danger-02: #ffc2ce;
+$bg-danger-03: $red-10;
+$bg-warning-01: $yellow-30;
+$bg-warning-02: $yellow-20;
+$bg-warning-03: $yellow-10;
+$bg-info-01: $blue-30;
+$bg-info-02: $noctex-sky-hover;
+$bg-info-03: $blue-10;
+
+// Texto en modo claro (≥4.5:1 sobre blanco y neutral-20)
+$content-primary: $neutral-90;
+$content-secondary: $neutral-70;
+$content-disabled: $neutral-40;
+$content-placeholder: $neutral-60;
+$content-danger: $red-50;
+$content-warning: $yellow-50;
+$content-positive: $noctex-mint-50;
+$content-info: $blue-50;
+$border-primary: $neutral-60;
+$border-hover: $neutral-70;
+$border-disabled: $neutral-20;
+$border-active: $green-50;
+$border-danger: $red-50;
+$border-divider: $neutral-20;
+$link-web: $green-60;
+$link-web-hover: $green-70;
+$link-web-visited: $green-60;
+$link-ui: $blue-50;
+$link-ui-hover: $blue-60;
+$link-ui-visited: $blue-60;
+
+// Texto en modo oscuro (≥4.5:1 sobre los tres fondos oscuros)
+$content-primary-dark: $noctex-text-dark;
+$content-secondary-dark: $noctex-text-2-dark;
+$content-disabled-dark: $neutral-60;
+$content-placeholder-dark: $neutral-50;
+$content-danger-dark: $red-30;
+$content-warning-dark: $yellow-30;
+$content-positive-dark: $noctex-mint-30;
+$content-info-dark: $blue-30;
+$border-primary-dark: $noctex-border-dark;
+$border-hover-dark: $neutral-40;
+$border-disabled-dark: $neutral-80;
+$border-active-dark: $green-30;
+$border-danger-dark: $red-30;
+$border-divider-dark: $noctex-divider-dark;
+$link-web-dark: $green-30;
+$link-web-hover-dark: $noctex-lilac-hover;
+$link-web-visited-dark: $noctex-lilac-visited;
+$link-ui-dark: $blue-30;
+$link-ui-hover-dark: $noctex-sky-hover;
+$link-ui-visited-dark: $noctex-sky-hover;
+
+/* ====== Variables CSS ====== */
+
+:root {
+  --white: #{$white};
+  --neutral-05: #{$neutral-05};
+  --neutral-10: #{$neutral-10};
+  --neutral-20: #{$neutral-20};
+  --neutral-30: #{$neutral-30};
+  --neutral-40: #{$neutral-40};
+  --neutral-50: #{$neutral-50};
+  --neutral-60: #{$neutral-60};
+  --neutral-70: #{$neutral-70};
+  --neutral-80: #{$neutral-80};
+  --neutral-85: #{$neutral-85};
+  --neutral-90: #{$neutral-90};
+  --green-10: #{$green-10};
+  --green-15: #{$green-15};
+  --green-20: #{$green-20};
+  --green-30: #{$green-30};
+  --green-40: #{$green-40};
+  --green-50: #{$green-50};
+  --green-60: #{$green-60};
+  --green-65: #{$green-65};
+  --green-70: #{$green-70};
+  --blue-10: #{$blue-10};
+  --blue-20: #{$blue-20};
+  --blue-30: #{$blue-30};
+  --blue-40: #{$blue-40};
+  --blue-50: #{$blue-50};
+  --blue-60: #{$blue-60};
+  --blue-70: #{$blue-70};
+  --red-10: #{$red-10};
+  --red-20: #{$red-20};
+  --red-30: #{$red-30};
+  --red-40: #{$red-40};
+  --red-50: #{$red-50};
+  --red-60: #{$red-60};
+  --red-70: #{$red-70};
+  --yellow-10: #{$yellow-10};
+  --yellow-20: #{$yellow-20};
+  --yellow-30: #{$yellow-30};
+  --yellow-40: #{$yellow-40};
+  --yellow-50: #{$yellow-50};
+  --yellow-60: #{$yellow-60};
+  --yellow-70: #{$yellow-70};
+  --noctex-mint-10: #{$noctex-mint-10};
+  --noctex-mint-30: #{$noctex-mint-30};
+  --noctex-mint-50: #{$noctex-mint-50};
+
+  --bg-light-primary: #{$bg-light-primary};
+  --bg-light-secondary: #{$bg-light-secondary};
+  --bg-light-tertiary: #{$bg-light-tertiary};
+  --bg-light-disabled: #{$bg-light-disabled};
+  --bg-dark-primary: #{$bg-dark-primary};
+  --bg-dark-secondary: #{$bg-dark-secondary};
+  --bg-dark-tertiary: #{$bg-dark-tertiary};
+  --bg-dark-disabled: #{$bg-dark-disabled};
+  --bg-accent-01: #{$bg-accent-01};
+  --bg-accent-02: #{$bg-accent-02};
+  --bg-accent-03: #{$bg-accent-03};
+  --bg-danger-01: #{$bg-danger-01};
+  --bg-danger-02: #{$bg-danger-02};
+  --bg-danger-03: #{$bg-danger-03};
+  --bg-warning-01: #{$bg-warning-01};
+  --bg-warning-02: #{$bg-warning-02};
+  --bg-warning-03: #{$bg-warning-03};
+  --bg-info-01: #{$bg-info-01};
+  --bg-info-02: #{$bg-info-02};
+  --bg-info-03: #{$bg-info-03};
+  --content-primary: #{$content-primary};
+  --content-secondary: #{$content-secondary};
+  --content-disabled: #{$content-disabled};
+  --content-placeholder: #{$content-placeholder};
+  --content-danger: #{$content-danger};
+  --content-warning: #{$content-warning};
+  --content-positive: #{$content-positive};
+  --content-info: #{$content-info};
+  --border-primary: #{$border-primary};
+  --border-hover: #{$border-hover};
+  --border-disabled: #{$border-disabled};
+  --border-active: #{$border-active};
+  --border-danger: #{$border-danger};
+  --border-divider: #{$border-divider};
+  --border-dark-divider: #{$noctex-divider-dark};
+  --link-web: #{$link-web};
+  --link-web-hover: #{$link-web-hover};
+  --link-web-visited: #{$link-web-visited};
+  --link-ui: #{$link-ui};
+  --link-ui-hover: #{$link-ui-hover};
+  --link-ui-visited: #{$link-ui-visited};
+  --content-primary-dark: #{$content-primary-dark};
+  --content-secondary-dark: #{$content-secondary-dark};
+  --content-disabled-dark: #{$content-disabled-dark};
+  --content-placeholder-dark: #{$content-placeholder-dark};
+  --content-danger-dark: #{$content-danger-dark};
+  --content-warning-dark: #{$content-warning-dark};
+  --content-positive-dark: #{$content-positive-dark};
+  --content-info-dark: #{$content-info-dark};
+  --border-primary-dark: #{$border-primary-dark};
+  --border-hover-dark: #{$border-hover-dark};
+  --border-disabled-dark: #{$border-disabled-dark};
+  --border-active-dark: #{$border-active-dark};
+  --border-danger-dark: #{$border-danger-dark};
+  --border-divider-dark: #{$border-divider-dark};
+  --link-web-dark: #{$link-web-dark};
+  --link-web-hover-dark: #{$link-web-hover-dark};
+  --link-web-visited-dark: #{$link-web-visited-dark};
+  --link-ui-dark: #{$link-ui-dark};
+  --link-ui-hover-dark: #{$link-ui-hover-dark};
+  --link-ui-visited-dark: #{$link-ui-visited-dark};
+
+  // Degradados «premium» de Overleaf → lavanda a cielo
+  --premium-gradient: linear-gradient(246deg, #{$green-70} 0%, #{$green-50} 45%, #{$blue-50} 100%);
+  --premium-gradient-dark: linear-gradient(246deg, #{$green-30} 0%, #{$noctex-lilac-hover} 45%, #{$blue-30} 100%);
+}
