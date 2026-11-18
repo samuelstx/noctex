@@ -108,6 +108,10 @@ html(
 		data-theme='light'
 		data-initial-theme=initialTheme
 	)
+		//- Noctex: aplica el último tema activo (oscuro por defecto) también en
+		//- las páginas que Overleaf solo pinta en claro. Lo guarda use-themed-page.
+		script(nonce=scriptNonce).
+			(function(){var t;try{t=localStorage.getItem('noctex-theme')}catch(e){}document.body.dataset.theme=t==='light'?'light':'default'})()
 		if settings.recaptcha && settings.recaptcha.siteKeyV3
 			script(
 				type='text/javascript'

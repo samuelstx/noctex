@@ -1,0 +1,92 @@
+// =============================================================================
+// Noctex · modo oscuro en las páginas que Overleaf solo pinta en claro
+// -----------------------------------------------------------------------------
+// Login, activación, ajustes, administración, bienvenida… usan los tokens
+// «claros» (--bg-light-*, --content-*, Bootstrap --bs-*). Con el tema oscuro
+// activo (body[data-theme='default'], ver layout-base.pug) los redirigimos a
+// sus equivalentes oscuros. El editor y el panel de proyectos ya usan los
+// tokens -dark/-themed y no se ven afectados. En modo claro no cambia nada.
+//
+// Se declara en <html> (no en <body>) porque Overleaf calcula variables
+// compuestas en :root (p. ej. --input-field-bg: var(--bg-light-primary)) y
+// esas se resuelven allí. :has() está en todos los navegadores actuales.
+// =============================================================================
+
+:root:has(> body[data-theme='default']) {
+  color-scheme: dark;
+
+  --bg-light-primary: var(--bg-dark-primary);
+  --bg-light-secondary: var(--bg-dark-secondary);
+  --bg-light-tertiary: var(--bg-dark-tertiary);
+  --bg-light-disabled: var(--bg-dark-disabled);
+  --bg-accent-03: #{rgba($green-30, 0.14)};
+  --bg-danger-03: #{rgba($red-30, 0.14)};
+  --bg-warning-03: #{rgba($yellow-30, 0.12)};
+  --bg-info-03: #{rgba($blue-30, 0.14)};
+
+  --content-primary: var(--content-primary-dark);
+  --content-secondary: var(--content-secondary-dark);
+  --content-disabled: var(--content-disabled-dark);
+  --content-placeholder: var(--content-placeholder-dark);
+  --content-danger: var(--content-danger-dark);
+  --content-warning: var(--content-warning-dark);
+  --content-positive: var(--content-positive-dark);
+  --content-info: var(--content-info-dark);
+
+  --border-primary: var(--border-primary-dark);
+  --border-hover: var(--border-hover-dark);
+  --border-disabled: var(--border-disabled-dark);
+  --border-active: var(--border-active-dark);
+  --border-danger: var(--border-danger-dark);
+  --border-divider: var(--border-divider-dark);
+
+  --link-web: var(--link-web-dark);
+  --link-web-hover: var(--link-web-hover-dark);
+  --link-web-visited: var(--link-web-visited-dark);
+  --link-ui: var(--link-ui-dark);
+  --link-ui-hover: var(--link-ui-hover-dark);
+  --link-ui-visited: var(--link-ui-visited-dark);
+
+  // Bootstrap (sus valores se compilan desde los tokens claros)
+  --bs-body-bg: var(--bg-dark-primary);
+  --bs-body-color: var(--content-primary-dark);
+  --bs-emphasis-color: var(--content-primary-dark);
+  --bs-heading-color: var(--content-primary-dark);
+  --bs-secondary-color: var(--content-secondary-dark);
+  --bs-secondary-bg: var(--bg-dark-secondary);
+  --bs-tertiary-color: var(--content-disabled-dark);
+  --bs-tertiary-bg: var(--bg-dark-tertiary);
+  --bs-border-color: var(--border-divider-dark);
+  --bs-border-color-translucent: #{rgba($noctex-text-dark, 0.12)};
+  --bs-link-color-rgb: 156, 201, 255;
+  --bs-link-hover-color-rgb: 191, 220, 255;
+  --bs-code-color: #{$red-30};
+
+  // Tarjetas: Overleaf fija --bs-card-bg: var(--white) (páginas de admin)
+  .card {
+    --bs-card-bg: var(--bg-dark-secondary);
+  }
+
+  // Campos: Bootstrap compila su fondo blanco como literal
+  .form-control,
+  .form-control:focus,
+  .form-select {
+    background-color: var(--input-field-bg, var(--bg-dark-primary));
+    color: var(--input-field-color, var(--content-primary-dark));
+  }
+}
+
+// Logotipo de cabecera según el tema activo. La cabecera renderizada en
+// servidor elige la variante al pintar (con style inline), de ahí !important.
+// El texto del título sobra: el logotipo ya dice «noctex».
+.navbar-brand .navbar-logo {
+  background-image: url('../../../public/noctex-logo-light.svg') !important;
+
+  [data-theme='default'] & {
+    background-image: url('../../../public/noctex-logo-dark.svg') !important;
+  }
+}
+
+.navbar-brand .navbar-logo + .navbar-title {
+  display: none;
+}

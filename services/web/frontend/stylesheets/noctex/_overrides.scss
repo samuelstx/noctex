@@ -5,6 +5,8 @@
 // explica qué corrige; si upstream cambia el componente, revisar aquí.
 // =============================================================================
 
+@import 'dark-pages';
+
 :root {
   // Tinta para texto sobre rellenos pastel (≥10:1 sobre todos los rellenos)
   --noctex-ink: #{$neutral-90};
@@ -25,10 +27,58 @@
   }
 }
 
+// Selección en modo oscuro: Overleaf usa un relleno intenso (--green-70) con
+// texto claro. En Noctex, tinte lavanda translúcido y texto lila claro
+// (#d9cefe sobre ≈#2c2a3f: 10:1). El modo claro ya usa tinte suave + lila oscuro.
+:root {
+  --noctex-selected-bg-dark: #{rgba($green-30, 0.18)};
+  --noctex-selected-color-dark: #{$noctex-lilac-hover};
+
+  --file-tree-item-selected-bg: var(--noctex-selected-bg-dark);
+  --file-tree-item-selected-color: var(--noctex-selected-color-dark);
+  --file-tree-item-dragging-bg: #{rgba($green-30, 0.32)};
+  --outline-item-highlight-bg: var(--noctex-selected-bg-dark);
+  --outline-item-highlight-color: var(--noctex-selected-color-dark);
+  --command-palette-selected-bg: var(--noctex-selected-bg-dark);
+  --command-palette-selected-color: var(--noctex-selected-color-dark);
+  --command-palette-description-selected-color: var(--content-secondary-dark);
+  --history-change-entry-selected-bg: #{rgba($green-30, 0.24)};
+  --table-icon-bg-hover: 11 11 16;
+
+  [data-theme='default'] {
+    --ds-nav-active-bg: var(--noctex-selected-bg-dark);
+    --ds-nav-active-color: var(--noctex-selected-color-dark);
+    --theme-toggle-selected-background: #{rgba($green-30, 0.28)};
+  }
+}
+
+@include theme('default') {
+  --dropdown-background-active: var(--noctex-selected-bg-dark);
+  --dropdown-text-active: var(--noctex-selected-color-dark);
+}
+
 // Modo claro: el relleno lila pastel necesita un borde para destacar sobre blanco
 @include theme('light') {
   .btn.btn-primary {
     --bs-btn-border-color: var(--green-50);
     --bs-btn-hover-border-color: var(--green-60);
+  }
+}
+
+// Zona de administración (CE+): se mantiene el aviso visual en la cabecera,
+// pero en rosa pastel en lugar de rojo saturado.
+.red-nav-bar-for-admins {
+  .navbar-default {
+    background: linear-gradient(to right, var(--navbar-bg) 10rem, #{rgba($red-30, 0.3)} 40rem);
+  }
+
+  .ide-redesign-toolbar {
+    --redesign-toolbar-background: #{rgba($red-30, 0.3)};
+  }
+}
+
+@include theme('light') {
+  .red-nav-bar-for-admins .navbar-default {
+    background: linear-gradient(to right, var(--navbar-bg) 10rem, #{$red-20} 40rem);
   }
 }
