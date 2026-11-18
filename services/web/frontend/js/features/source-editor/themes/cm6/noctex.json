@@ -39,7 +39,7 @@
   },
   "highlightStyle": {
     ".tok-keyword": {
-      "color": "#c4b5fd"
+      "color": "#b9a4ff"
     },
     ".tok-literal": {
       "color": "#ffa3b5"
@@ -70,7 +70,7 @@
       "color": "#9de5c3"
     },
     ".tok-tagName": {
-      "color": "#c4b5fd"
+      "color": "#b9a4ff"
     }
   },
   "dark": true
