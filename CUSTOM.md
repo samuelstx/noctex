@@ -42,6 +42,14 @@ git merge cep/ext-ce          # o la etiqueta, p. ej. v6.3.3-ext-v5.2
 | `services/web/frontend/stylesheets/noctex/_overrides.scss` | nuevo | Ajustes de componentes: texto oscuro sobre botones pastel, bordes de botones |
 | `services/web/frontend/stylesheets/main-style.scss` | +2 líneas | Importa los ajustes al final |
 
+| `services/web/frontend/stylesheets/noctex/_dark-pages.scss` | nuevo | En modo oscuro, redirige en `<html>` los tokens claros y los de Bootstrap a los oscuros (login, ajustes, administración…); campos, tarjetas y títulos; logotipo de cabecera según el tema |
+| `services/web/app/views/layout-base.pug` | +4 líneas | Mini-script al abrir `<body>`: aplica el último tema activo (oscuro por defecto) en las páginas renderizadas en servidor |
+| `services/web/frontend/js/shared/hooks/use-themed-page.tsx` | +5 líneas | Guarda el tema activo en `localStorage['noctex-theme']` |
+
+En `_overrides.scss` también: selección en modo oscuro con tinte lavanda
+translúcido (árbol de archivos, índice, menús, historial, paleta de comandos,
+panel de proyectos) y la cabecera de administración de CE+ en rosa pastel.
+
 El verde de marca de Overleaf se sustituye **conservando el nombre** de la rampa
 (`--green-*` ahora es lila) para que los ~40 componentes que lo usan
 directamente cambien sin tocarlos.
@@ -75,6 +83,7 @@ Contraste verificado con WCAG 2.x (texto ≥ 4.5:1, bordes ≥ 3:1):
 | `noctex-brand/make-brand.sh` | nuevo | Genera logotipos y favicons (rsvg-convert + ImageMagick) |
 | `services/web/public/noctex-logo-{dark,light}.svg` | nuevo | Logotipo para cabecera |
 | `services/web/public/favicon*.{svg,png,ico}`, `apple-touch-icon.png`, `mask-favicon.svg` | sustituidos | Favicons Noctex (normal, compilando, compilado, error) |
+| `services/web/public/img/ol-brand/*` | sustituidos | Logotipos de Overleaf reemplazados por Noctex con mismos nombres y proporciones (barra del editor, carga, cabecera, correos, imagen social) |
 
 El nombre, el logotipo y el pie (con el enlace al código fuente que exige la
 AGPL) se configuran por variables de entorno en el despliegue:
