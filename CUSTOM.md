@@ -90,7 +90,20 @@ AGPL) se configuran por variables de entorno en el despliegue:
 `OVERLEAF_APP_NAME`, `OVERLEAF_NAV_TITLE`, `OVERLEAF_HEADER_IMAGE_URL_LIGHT`,
 `OVERLEAF_HEADER_IMAGE_URL_DARK`, `OVERLEAF_RIGHT_FOOTER`.
 
-### 4. Entorno de pruebas local
+### 4. Editor en móvil (< 768 px)
+
+| Archivo | Tipo | Qué hace |
+|---|---|---|
+| `services/web/frontend/js/features/ide-react/components/noctex/mobile-editor-bar.tsx` | nuevo | Barra inferior Archivos · Código · PDF · Más; fuerza la disposición «flat» en móvil y la restaura al volver a escritorio; PDF compila si hay cambios; textos propios en español/inglés |
+| `services/web/frontend/stylesheets/noctex/_mobile.scss` | nuevo | Barra superior compacta, panel lateral como cajón superpuesto, botones de 48 px, código a 16 px (evita el zoom de iOS) |
+| `services/web/frontend/js/features/ide-react/components/layout/main-layout.tsx` | +2 líneas | Monta la barra |
+| `services/web/app/src/Features/Project/ProjectController.mjs` | 1 valor | `metadata.viewport: true` en el editor (Overleaf la desactivaba y el móvil pintaba el escritorio a escala) |
+
+Probado en 360×800 (Galaxy S), 375×667 (iPhone SE), 390×844 (iPhone 15) y
+412×915 (Pixel): sin desbordamiento horizontal; en 1280×800 el editor sigue
+igual que en Overleaf.
+
+### 5. Entorno de pruebas local
 
 `noctex-dev/compose.yaml`: Noctex + MongoDB 8 + Redis 7.4 en `127.0.0.1:8080`.
 

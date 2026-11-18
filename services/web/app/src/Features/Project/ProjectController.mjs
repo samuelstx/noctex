@@ -1185,7 +1185,8 @@ const _ProjectController = {
         hasUnlimitedAi:
           fullFeatureSet?.aiUsageQuota === Settings.aiFeatures?.unlimitedQuota,
         detachRole,
-        metadata: { viewport: false },
+        // Noctex: con viewport el editor se adapta al móvil (antes viewport: false)
+        metadata: { viewport: true },
         showUpgradePrompt,
         fixedSizeDocument: true,
         hasTrackChangesFeature: Features.hasFeature('track-changes'),

@@ -1,0 +1,188 @@
+// =============================================================================
+// Noctex · editor en móvil (< 768 px)
+// -----------------------------------------------------------------------------
+// Lo activa MobileEditorBar añadiendo body.noctex-mobile-editor (solo en el
+// editor). Código o PDF a pantalla completa, barra superior compacta, barra
+// inferior con pestañas y los paneles laterales como cajón superpuesto.
+// Botones táctiles de 48 px (WCAG 2.5.5 recomienda ≥ 44 px).
+// =============================================================================
+
+$noctex-mobile-bar-height: 60px;
+$noctex-touch: 48px;
+
+.noctex-mobile-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  flex: none;
+  height: calc(#{$noctex-mobile-bar-height} + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--bg-secondary-themed);
+  border-top: 1px solid var(--border-divider-themed);
+  position: relative;
+  z-index: 1045;
+}
+
+.noctex-mobile-bar-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: $noctex-touch;
+  border: 0;
+  background: transparent;
+  color: var(--content-secondary-themed);
+  font-size: var(--font-size-01);
+  line-height: 1.2;
+  -webkit-tap-highlight-color: transparent;
+
+  .noctex-mobile-bar-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: 22px;
+    transition: background-color 0.15s ease;
+  }
+
+  &.active {
+    color: var(--link-web-themed);
+
+    .noctex-mobile-bar-icon {
+      background: #{rgba($green-30, 0.18)};
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--border-active-dark);
+    outline-offset: -4px;
+  }
+}
+
+// Punto «hay cambios sin compilar» sobre el icono del PDF
+.noctex-mobile-bar-badge {
+  position: absolute;
+  top: 3px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--content-warning-themed, #{$yellow-30});
+  box-shadow: 0 0 0 2px var(--bg-secondary-themed);
+}
+
+.noctex-mobile-more {
+  position: fixed;
+  right: 8px;
+  bottom: calc(#{$noctex-mobile-bar-height} + 8px + env(safe-area-inset-bottom, 0px));
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  min-width: 230px;
+  padding: var(--spacing-02);
+  background: var(--bg-secondary-themed);
+  border: 1px solid var(--border-divider-themed);
+  border-radius: var(--border-radius-large, 12px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 45%);
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-04);
+    min-height: $noctex-touch;
+    padding: 0 var(--spacing-05);
+    border: 0;
+    border-radius: var(--border-radius-base);
+    background: transparent;
+    color: var(--content-primary-themed);
+    text-align: left;
+
+    &:hover,
+    &:focus-visible {
+      background: #{rgba($green-30, 0.14)};
+    }
+  }
+}
+
+.noctex-mobile-backdrop {
+  position: fixed;
+  inset: 0 0 calc(#{$noctex-mobile-bar-height} + env(safe-area-inset-bottom, 0px));
+  z-index: 1035;
+  border: 0;
+  background: rgb(0 0 0 / 55%);
+}
+
+body.noctex-mobile-editor {
+  // Barra superior compacta: sin menú File/Edit…, solo logo, título y Compartir
+  .ide-redesign-toolbar {
+    .ide-redesign-toolbar-menu-bar {
+      display: none;
+    }
+
+    .ide-redesign-toolbar-actions > :not(:last-child) {
+      display: none;
+    }
+
+    .ide-redesign-toolbar-button-container,
+    .ide-redesign-toolbar-home-button,
+    .btn {
+      min-height: 40px;
+    }
+  }
+
+  // Sin columna de iconos ni tiradores de redimensionar
+  .ide-rail,
+  .ide-redesign-inner [data-panel-resize-handle-id],
+  .horizontal-resize-handle {
+    display: none !important;
+  }
+
+  // Panel lateral: oculto salvo que esté abierto, y entonces como cajón
+  [id^='ide-redesign-sidebar-panel-'] {
+    display: none !important;
+  }
+
+  &.noctex-rail-open [id^='ide-redesign-sidebar-panel-'] {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    bottom: calc(#{$noctex-mobile-bar-height} + env(safe-area-inset-bottom, 0px));
+    left: 0;
+    z-index: 1040;
+    width: min(86vw, 380px) !important;
+    flex: none !important;
+    overflow: auto !important;
+    background: var(--bg-primary-themed);
+    border-right: 1px solid var(--border-divider-themed);
+    box-shadow: 8px 0 32px rgb(0 0 0 / 45%);
+  }
+
+  // Los botones «Switch to editor/PDF» sobran: la barra inferior ya cambia de
+  // vista. !important porque Bootstrap pone .d-inline-grid con !important.
+  .ol-toolbar-layout-right > .btn.d-inline-grid,
+  .toolbar-pdf-right > .btn.d-inline-grid {
+    display: none !important;
+  }
+
+  // Selector de modo (Editando/Revisando) solo con icono para ganar ancho
+  .review-mode-switcher-toggle-label {
+    display: none !important;
+  }
+
+  // iOS amplía la página al enfocar texto de menos de 16 px
+  .cm-editor .cm-content,
+  .cm-editor .cm-gutters {
+    font-size: 16px !important;
+  }
+
+  // Filas del árbol de archivos e índice: más altas para el dedo
+  .file-tree .entity,
+  .outline-item-row {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+  }
+}
