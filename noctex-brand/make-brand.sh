@@ -46,6 +46,39 @@ mark "$INK" "#ffa3b5" "$SKY"    > "$OUT/favicon-error.svg"
 # Safari pinned tab: monocromo
 mark "#000" "#fff" "#fff" | sed 's/fill="#000"/fill="none"/' > "$OUT/mask-favicon.svg"
 
+# --- Sustitución de los logotipos de Overleaf (mismos nombres y proporciones) ---
+# Así cambian la barra del editor, la pantalla de carga, la cabecera, el pie y
+# los correos sin tocar código.
+BRAND="$OUT/img/ol-brand"
+
+o_mark() { # viewBox 136x157 como el original; $1 luna, $2 estrella
+cat <<EOF
+<svg xmlns="http://www.w3.org/2000/svg" width="136" height="157" viewBox="0 0 136 157" role="img" aria-label="Noctex">
+  <defs><mask id="m"><rect width="136" height="157" fill="#fff"/><circle cx="94" cy="58" r="46" fill="#000"/></mask></defs>
+  <circle cx="64" cy="88" r="58" fill="$1" mask="url(#m)"/>
+  <circle cx="118" cy="24" r="9" fill="$2"/>
+</svg>
+EOF
+}
+
+wordmark_box() { # $1 luna, $2 texto, $3 estrella, $4 viewBox, $5 ancho, $6 alto
+  wordmark "$1" "$2" "$3" | sed -e "s|width=\"124\" height=\"32\" viewBox=\"0 0 124 32\"|width=\"$5\" height=\"$6\" viewBox=\"$4\"|"
+}
+
+o_mark "$LILAC" "$SKY"           > "$BRAND/overleaf-o-white.svg"  # sobre fondo oscuro
+o_mark "$LILAC_DEEP" "#3560ac"   > "$BRAND/overleaf-o-dark.svg"   # sobre fondo claro
+o_mark "$LILAC_DEEP" "#3560ac"   > "$BRAND/overleaf-o.svg"
+o_mark "#8b879c" "#8b879c"       > "$BRAND/overleaf-o-grey.svg"
+wordmark_box "$LILAC_DEEP" "$INK" "#3560ac" "0 -2 124 36"   542 157 > "$BRAND/overleaf.svg"
+wordmark_box "$LILAC" "$TEXT_DARK" "$SKY"   "0 -2 124 36"   542 157 > "$BRAND/overleaf-white.svg"
+wordmark_box "$INK" "$INK" "$INK"           "0 -2.6 124 36.5" 129 38 > "$BRAND/overleaf-black.svg"
+wordmark_box "$LILAC_DEEP" "$INK" "#3560ac" "0 -3.1 124 38.2" 130 40 > "$BRAND/overleaf-green.svg"
+
+# PNG derivados (correo, redes sociales)
+rsvg-convert -w 277 -h 80 -a "$BRAND/overleaf.svg" | magick - -background white -gravity center -extent 277x80 "$BRAND/email-logo@2x.png"
+rsvg-convert -w 330 "$BRAND/overleaf-white.svg" | magick - -background "$INK" -gravity center -extent 410x180 "$BRAND/logo-horizontal.png"
+rsvg-convert -w 170 -h 196 "$BRAND/overleaf-o-white.svg" | magick - -background "$INK" -gravity center -extent 256x256 "$BRAND/overleaf_og_logo.png"
+
 rsvg-convert -w 16  -h 16  "$OUT/favicon.svg" -o "$OUT/favicon-16x16.png"
 rsvg-convert -w 32  -h 32  "$OUT/favicon.svg" -o "$OUT/favicon-32x32.png"
 rsvg-convert -w 180 -h 180 "$OUT/favicon.svg" -o "$OUT/apple-touch-icon.png"
