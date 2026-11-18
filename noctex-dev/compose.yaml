@@ -23,7 +23,7 @@ services:
       OVERLEAF_HEADER_IMAGE_URL_DARK: /noctex-logo-dark.svg
       OVERLEAF_HEADER_IMAGE_URL_LIGHT: /noctex-logo-light.svg
       # Enlace al código fuente modificado (obligatorio por la AGPL-3.0)
-      OVERLEAF_RIGHT_FOOTER: '[{"text":"Código fuente de Noctex (AGPL)","url":"https://github.com/samuelstx/noctex"}]'
+      OVERLEAF_RIGHT_FOOTER: '[{"text":"Código fuente de Noctex (AGPL)","url":"https://github.com/samuelstx/noctex/tree/custom"}]'
       OVERLEAF_SITE_URL: http://localhost:8080
       OVERLEAF_MONGO_URL: mongodb://mongo/sharelatex
       OVERLEAF_REDIS_HOST: redis
